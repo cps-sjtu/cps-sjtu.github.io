@@ -41,6 +41,23 @@
     CPS Group SJTU
   </div>
 
+  <div class="proj-card" onclick="location.href='/Zero-Shot-STL'">
+    <div class="title">
+      Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks
+    </div>
+    <div class="authors">
+      <a class="underline">Ruijia Liu</a>,
+      <a class="underline">Ancheng Hou</a>,
+      <a>Xiao Yu</a>,
+      <a>and</a>
+      <a class="bold">Xiang Yin</a>
+    </div>
+    <div class="abstract">
+      <b>Abstract:</b>
+      Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we address the problem of generating executable STL plans for systems with unknown dynamics. We propose a  hierarchical planning framework that enables zero-shot generalization to new STL tasks by leveraging only task-agnostic trajectory data during offline training. The framework consists of three key components: (i) decomposing the STL specification into several progresses and time constraints, (ii) searching for timed waypoints that satisfy all progresses under time constraints, and (iii) generating trajectory segments using a pre-trained diffusion model and stitching them into complete trajectories. We formally prove that our method guarantees STL satisfaction, and simulation results demonstrate its effectiveness in generating dynamically feasible trajectories across diverse long-horizon STL tasks.
+    </div>
+  </div>
+
   <div class="proj-card" onclick="location.href='/DAG-STL'">
     <div class="title">
       DAG-STL: A Hierarchical Framework of Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks
