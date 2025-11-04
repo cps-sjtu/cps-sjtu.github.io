@@ -1,88 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="CPS-SJTU">
-  <meta name="description" content="Cyber Physical Systems Lab, Shanghai Jiao Tong University">
-  <!-- <meta name="keywords" content=""> -->
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-  <!-- include custom css -->
-  <link rel="stylesheet" href="static/css/custom.css">
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>CPS Group SJTU</title>
-
-  <!-- Favicon and App Icons -->
-  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
-  <!-- <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
-</head>
-
-<body class="main-page-container">
-  <div class="main-page-header">
-    CPS Group SJTU
-  </div>
-
-  <div class="proj-card" onclick="location.href='/Zero-Shot-STL'">
-    <div class="date">
-      <img src="static/icon/canlender.svg" class="icon" />
-      Oct, 2025
-    </div>
-    <div class="title">
-      Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks
-    </div>
-    <div class="authors">
-      <a class="underline">Ruijia Liu</a>,
-      <a class="underline">Ancheng Hou</a>,
-      <a>Xiao Yu</a>
-      <a>and</a>
-      <a class="bold">Xiang Yin</a>
-    </div>
-    <div class="abstract">
-      <b>Abstract:</b>
-      Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we address the problem of generating executable STL plans for systems with unknown dynamics. We propose a  hierarchical planning framework that enables zero-shot generalization to new STL tasks by leveraging only task-agnostic trajectory data during offline training. The framework consists of three key components: (i) decomposing the STL specification into several progresses and time constraints, (ii) searching for timed waypoints that satisfy all progresses under time constraints, and (iii) generating trajectory segments using a pre-trained diffusion model and stitching them into complete trajectories. We formally prove that our method guarantees STL satisfaction, and simulation results demonstrate its effectiveness in generating dynamically feasible trajectories across diverse long-horizon STL tasks.
-    </div>
-  </div>
-
-  <div class="proj-card" onclick="location.href='/DAG-STL'">
-    <div class="date">
-      <img src="static/icon/canlender.svg" class="icon" />
-      Oct, 2025
-    </div>
-    <div class="title">
-      DAG-STL: A Hierarchical Framework of Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks
-    </div>
-    <div class="authors">
-      <a class="underline">Ruijia Liu</a>,
-      <a class="underline">Ancheng Hou</a>,
-      <a>Xiao Yu</a>,
-      <a>Shaoyuan Li</a>
-      <a>and</a>
-      <a class="bold">Xiang Yin</a>
-    </div>
-    <div class="abstract">
-      <b>Abstract:</b>
-      Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we investigate the problem of generating executable STL plans for systems whose dynamics are unknown a priori. We propose a new planning framework that uses only task-agnostic data during the offline training stage, enabling zero-shot generalization to new STL tasks. Our framework is hierarchical, including: (i) decomposing the STL task into a set of progress and time constraints, (ii) searching for time-aware way-points guided by task-agnostic data, (iii) generating trajectories using a pre-trained safe diffusion model, and (iv) verifying the STL satisfaction and dynamic feasibility of the trajectory using a robustness-based STL checker and a conformal dynamics verifier. In addition, we incorporate an online replanning strategy during execution to further improve the actuation success rate. Simulation results demonstrate the effectiveness of our method indeed in achieving zero-shot generalization to various STL tasks.
-    </div>
-  </div>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/cps.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPS Group SJTU</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
