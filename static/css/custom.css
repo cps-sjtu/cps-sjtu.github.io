@@ -72,12 +72,13 @@
   border: 1.5px solid #ddd;
   text-align: center;
   font-size: 1.2rem;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
 .proj-card:hover {
   cursor: pointer;
-  transform: translateY(-1px) scale(1.005);
+  transform: translateY(-4px);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .proj-card > .title {
@@ -91,6 +92,11 @@
   font-size: 0.9rem;
   color: #555;
   text-align: start;
+}
+
+.proj-card > .authors > a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .proj-card > .authors > .underline {
@@ -112,4 +118,19 @@
   display: -webkit-box;
   -webkit-line-clamp: 5; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+.proj-card > .date {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #8a8a8a;
+  margin-bottom: 0.5rem;
+  margin-left: 5px;
+}
+
+.proj-card > .date > .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-right: 0.5rem;
 }
