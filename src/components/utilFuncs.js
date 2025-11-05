@@ -56,3 +56,18 @@ export function useScrollToTop() {
     stopWatchingScroll, // 停止监听滚动
   };
 }
+
+// 根据是否有{component}字段分离模板页面和自定义页面
+export function splitRoutes(routerConfig) {
+  const templateRoutes = {};
+  const customRoutes = {};
+  Object.keys(routerConfig).map((path) => {
+    const config = routerConfig[path];
+    if (config.component) {
+      customRoutes[path] = config;
+    } else {
+      templateRoutes[path] = config;
+    }
+  });
+  return { templateRoutes, customRoutes };
+}

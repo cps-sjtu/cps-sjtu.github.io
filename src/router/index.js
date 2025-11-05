@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import DynamicProjPage from "../views/DynamicProjPage.vue";
 import { routerConfig } from "../../config/router";
+import { splitRoutes } from "../components/utilFuncs";
+
+// 分离模板页面和自定义页面配置
+const { templateRoutes, customRoutes } = splitRoutes(routerConfig);
 
 // 工具函数：标准化路径（去除末尾 /，保留根路径）
 function normalizePath(path) {
@@ -16,23 +20,36 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  // 自定义页面路由可以在此添加
-  // ...
-
-  // 动态生成页面路由
+  // 自定义页面路由
+  ...Object.keys(customRoutes).map((path) => ({
+    path: path,
+    component: customRoutes[path].component,
+    props: {
+      config: customRoutes[path].config,
+    },
+  })),
+  // 模板生成页面路由
   {
     path: "/:path(.*)*", // 匹配所有路径
     component: DynamicProjPage,
     props: (route) => {
       const normalizedPath = normalizePath(route.path);
-      const config = routerConfig[normalizedPath];
+      const config = templateRoutes[normalizedPath];
       return {
         config: config || null,
       };
     },
     beforeEnter: async (to, from, next) => {
       const normalizedPath = normalizePath(to.path);
-      if (routerConfig[normalizedPath]) {
+      const config = templateRoutes[normalizedPath];
+      // 处理重定向逻辑
+      if (config && config.routeConfig && config.routeConfig.redirect) {
+        const redirectPath = config.routeConfig.redirect;
+        next(redirectPath);
+        return;
+      }
+
+      if (config) {
         next();
       } else {
         alert(`目标页面${normalizedPath}不存在，已重定向到首页。`);

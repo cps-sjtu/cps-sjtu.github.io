@@ -52,8 +52,8 @@ function download() {
 
 <style scoped>
 .inner-content {
-  margin: 0 2em;
-  margin-top: 0.5em;
+  margin: 0 2rem;
+  margin-top: 0.5rem;
 }
 .block-title {
   width: unset;
@@ -92,8 +92,9 @@ function download() {
   margin: 0;
   word-wrap: normal;
   padding: 1rem 3rem;
-  background: #fafafa;
+  background: #f3f3f3;
   border-radius: 16px;
+  border: 1px solid #e0e0e0;
   text-align: left;
   font-size: 0.9rem;
 }

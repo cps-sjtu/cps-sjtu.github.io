@@ -13,6 +13,9 @@ import TitleBlock from "../components/titleBlock.vue";
 import LinkBtn from "../components/linkBtn.vue";
 import AbstractBlock from "../components/abstractBlock.vue";
 import BibtexBlock from "../components/bibtexBlock.vue";
+import CarouselBlock from "../components/carouselBlock.vue";
+import GridviewImageBlock from "../components/gridviewImageBlock.vue";
+import VideoBlock from "../components/videoBlock.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
@@ -23,6 +26,9 @@ const pageConfig = props.config.pageConfig;
 const authorsInfo = props.config.authorsInfo;
 const affiliationsInfo = props.config.affiliationsInfo;
 const linkbtnsInfo = props.config.linkbtnsInfo;
+const carouselsInfo = props.config.carouselsInfo;
+const gridviewImagesInfo = props.config.gridviewImagesInfo;
+const videosInfo = props.config.videosInfo;
 
 // 设置页面头信息
 useHead(getHeaderFromInfo(headerInfo));
@@ -76,10 +82,47 @@ onUnmounted(() => {
       </TitleBlock>
 
       <!-- Paper abstract -->
-      <AbstractBlock :abstract="paperInfo.abstract" />
+      <AbstractBlock
+        v-if="pageConfig.showAbstractBlock"
+        :blockTitle="'Abstract'"
+        :abstract="paperInfo.abstract"
+      />
+
+      <!-- carousel -->
+      <CarouselBlock
+        v-for="info in carouselsInfo"
+        :description="info.description"
+        :imgFit="info.imgFit"
+        :blockTitle="info.title"
+        :dataList="info.dataList"
+        :style="info.style"
+      />
+
+      <!-- gridview images -->
+      <GridviewImageBlock
+        v-for="info in gridviewImagesInfo"
+        :imgFit="info.imgFit"
+        :description="info.description"
+        :blockTitle="info.title"
+        :showImageCaption="info.showImageCaption"
+        :rows="info.rows"
+        :columns="info.columns"
+        :dataList="info.dataList"
+      />
+
+      <!-- video block -->
+      <VideoBlock
+        v-for="info in videosInfo"
+        :blockTitle="info.title"
+        :description="info.description"
+        :data="info.data"
+      />
 
       <!--BibTex citation -->
-      <BibtexBlock v-if="paperInfo.bibtex" :bibtex="paperInfo.bibtex" />
+      <BibtexBlock
+        v-if="paperInfo.bibtex && pageConfig.showBibtexBlock"
+        :bibtex="paperInfo.bibtex"
+      />
     </div>
   </div>
 </template>
@@ -87,7 +130,8 @@ onUnmounted(() => {
 <style lang="css" scoped>
 .content {
   justify-self: center;
-  max-width: 80%;
+  width: 80%;
+  max-width: 1200px;
   margin: 0 2rem;
   padding-bottom: 4rem;
 }
