@@ -3,6 +3,12 @@ import Home from "../views/Home.vue";
 import DynamicProjPage from "../views/DynamicProjPage.vue";
 import { routerConfig } from "../../config/router";
 
+// 工具函数：标准化路径（去除末尾 /，保留根路径）
+function normalizePath(path) {
+  if (path === "/") return "/";
+  return path.replace(/\/+$/, "");
+}
+
 // 导入页面组件
 const routes = [
   {
@@ -10,20 +16,26 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  // 自定义页面路由可以在此添加
+  // ...
+
+  // 动态生成页面路由
   {
     path: "/:path(.*)*", // 匹配所有路径
     component: DynamicProjPage,
     props: (route) => {
-      const config = routerConfig[route.path];
+      const normalizedPath = normalizePath(route.path);
+      const config = routerConfig[normalizedPath];
       return {
         config: config || null,
-      }
+      };
     },
     beforeEnter: async (to, from, next) => {
-      if (routerConfig[to.path]) {
+      const normalizedPath = normalizePath(to.path);
+      if (routerConfig[normalizedPath]) {
         next();
       } else {
-        alert(`目标页面${to.path}不存在，已重定向到首页。`);
+        alert(`目标页面${normalizedPath}不存在，已重定向到首页。`);
         next("/"); // 重定向到首页
       }
     },
