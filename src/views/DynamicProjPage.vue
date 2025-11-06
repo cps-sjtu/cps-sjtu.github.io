@@ -124,6 +124,16 @@ onUnmounted(() => {
         :bibtex="paperInfo.bibtex"
       />
     </div>
+
+    <div class="footer">
+      <div class="ref">
+        This page's design was inspired in part by
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">
+          Eliahu Horwitz's Academic project page template
+        </a>
+        .
+      </div>
+    </div>
   </div>
 </template>
 
@@ -133,7 +143,7 @@ onUnmounted(() => {
   width: 80%;
   max-width: 1200px;
   margin: 0 2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
 .proj-page-container {
@@ -147,5 +157,22 @@ onUnmounted(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+.footer {
+  height: 4rem;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-light-color);
+  /* background-color: var(--background-color-tertiary); */
+}
+
+.footer .ref a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
 }
 </style>
