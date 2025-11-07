@@ -23,13 +23,6 @@
   justify-content: center;
   align-items: center;
   background-color: var(--primary-light-color);
-  /* background-color: var(--background-color-tertiary); */
-}
-
-.footer .ref a {
-  color: var(--font-color-primary);
-  text-decoration: none;
   max-width: 100%;
-  font-weight: 600;
 }
 </style>

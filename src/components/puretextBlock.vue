@@ -1,5 +1,6 @@
 <script setup>
 import BasicBlock from "./basicBlock.vue";
+import MarkdownSpan from "./markdownSpan.vue";
 
 defineProps({
   content: String,
@@ -9,9 +10,7 @@ defineProps({
 <template>
   <BasicBlock v-bind="$attrs">
     <div class="inner-content">
-      <p>
-        {{ content }}
-      </p>
+      <MarkdownSpan class="p" :content="content" />
     </div>
   </BasicBlock>
 </template>
@@ -20,8 +19,11 @@ defineProps({
 .inner-content {
   margin: 0 2rem;
   margin-top: 0.5rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
   text-align: justify;
+}
+
+.p {
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 </style>

@@ -19,6 +19,14 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  width: {
+    type: String,
+    default: "100%",
+  },
+  height: {
+    type: String,
+    default: "auto",
+  },
   dataList: {
     type: Array,
     default: () => {
@@ -35,7 +43,14 @@ const props = defineProps({
       :style="`grid-template-rows: repeat(${props.rows}, 1fr); grid-template-columns: repeat(${props.columns}, 1fr); `"
     >
       <div v-for="data in dataList" class="grid-item">
-        <img :src="data.src" :style="{ objectFit: props.imgFit }" />
+        <img
+          :src="data.src"
+          :style="{
+            objectFit: props.imgFit,
+            width: props.width,
+            height: props.height,
+          }"
+        />
         <div
           v-if="showImageCaption"
           style="text-align: center; margin-top: 0.5rem"

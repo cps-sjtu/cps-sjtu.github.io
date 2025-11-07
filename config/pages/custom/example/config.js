@@ -1,5 +1,5 @@
 import {
-  AbstractBlock,
+  PuretextBlock,
   CarouselBlock,
   GridviewImageBlock,
   VideoBlock,
@@ -10,6 +10,20 @@ import {
 const routeConfig = {
   // redirect: "/DAG-STL",
   redirect: null,
+};
+
+// 首页配置
+const homeConfig = {
+  // 要显示的徽章配置，如果配置了 paperInfo.date，则会自动显示发布日期徽章
+  bandages: [
+    // {
+    //   type: "custom", // 徽章标签
+    //   label: "NeurIPS 2025", // 徽章标签
+    //   color: "#ff3c00ff", // 徽章颜色，"" 表示使用默认颜色"
+    //   icon_type: "url", // 徽章图标类型，目前支持 svg 和 url 两种类型
+    //   icon: "https://nips.cc/static/core/img/neurips-navbar-logo.svg", // 徽章图标svg或链接
+    // },
+  ],
 };
 
 // 项目页配置
@@ -28,8 +42,9 @@ const pageConfig = {
 const paperInfo = {
   title: "EXAMPLE_TITLE_PLACEHOLDER",
   shortTitle: "EXAMPLE_SHORT_TITLE_PLACEHOLDER",
-  date: "EXAMPLE_DATE_PLACEHOLDER",
-  abstract: "EXAMPLE_ABSTRACT_PLACEHOLDER",
+  date: "",  // YYYY-MM-DD, 可不填
+  abstract:
+    "EXAMPLE_ABSTRACT_PLACEHOLDER, This block supports **Markdown** syntax.",
   bibtex: `@article{YourPaperKey2024,
     title={Your Paper Title Here},
     author={First Author and Second Author and Third Author},
@@ -111,10 +126,10 @@ const titleBlockInfo = {
 
 // 自定义其他节组件信息
 // TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
-// 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
+// 目前支持的组件有：[PuretextBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
 const blocksInfo = [
-  // 摘要组件信息
-  new AbstractBlock(
+  // 纯文字组件信息
+  new PuretextBlock(
     "Abstract", // 摘要节标题
     paperInfo.abstract // 摘要内容
   ),
@@ -122,7 +137,7 @@ const blocksInfo = [
   new CarouselBlock(
     "image", // 图片类型轮播
     "Example Image Carousel", // 轮播节标题，可不显示
-    "This is an example image carousel.", // 轮播节描述，可不显示
+    "This is an example image carousel, this description supports **Markdown** syntax.", // 轮播节描述，可不显示
     "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
     [
       // 图片地址列表 (相对于 public 文件夹的路径)
@@ -132,11 +147,13 @@ const blocksInfo = [
   // 网格视图图片组件信息
   new GridviewImageBlock(
     "Example Gridview Image Block", // 网格视图节标题，可不显示
-    "This is an example gridview image block.", // 网格视图节描述，可不显示
+    "This is an example gridview image block, this description supports **Markdown** syntax.", // 网格视图节描述，可不显示
     true, // 是否显示图片标题
     "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
     1, // 行数
     2, // 列数
+    "100%", // 宽度，支持百分比和像素值
+    "auto", // 高度，支持百分比和像素值
     [
       // 图片数据列表
       {
@@ -148,7 +165,7 @@ const blocksInfo = [
   // 视频组件信息
   new VideoBlock(
     "Example Video Block", // 视频节标题，可不显示
-    "This is an example video block.", // 视频节描述，可不显示
+    "This is an example video block, this description supports **Markdown** syntax.", // 视频节描述，可不显示
     {
       // videoType: "video", // 视频类型，可选值有 [iframe, video]
       // src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -164,6 +181,8 @@ const blocksInfo = [
 // 导出配置
 export const configAll = {
   routeConfig: routeConfig,
+  homeConfig: homeConfig,
+  authorsInfo: authorsInfo,
   pageConfig: pageConfig,
   paperInfo: paperInfo,
   headerInfo: headerInfo,

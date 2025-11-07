@@ -71,3 +71,48 @@ export function splitRoutes(routerConfig) {
   });
   return { templateRoutes, customRoutes };
 }
+
+// 按照时间先后排序项目（支持传入数组或 path:config 映射的字典）
+// 时间相同则按 paperInfo.title 的字母顺序 a-z 排序（不区分大小写）
+export function sortProjectsByDate(projects) {
+  // 比较函数：接受两个 project 配置对象
+  const compare = (a, b) => {
+    const dateA = new Date(a.paperInfo?.date);
+    const dateB = new Date(b.paperInfo?.date);
+
+    // 处理无效日期的情况：将无日期的项排到前面
+    const invalidA = Number.isNaN(dateA.getTime());
+    const invalidB = Number.isNaN(dateB.getTime());
+    if (invalidA && invalidB) return 0;
+    if (invalidA) return -1;
+    if (invalidB) return 1;
+
+    // 降序排列，最新的在前面
+    const timeDiff = dateB.getTime() - dateA.getTime();
+    if (timeDiff !== 0) return timeDiff;
+
+    // 时间相同：按 paperInfo.title 的字母顺序 a-z（不区分大小写）
+    const titleA = String(a.paperInfo?.title ?? "");
+    const titleB = String(b.paperInfo?.title ?? "");
+    return titleA.localeCompare(titleB, undefined, { sensitivity: "base" });
+  };
+
+  // 如果是对象（path -> config），按排序后的键顺序构建一个新对象并返回（保持输入为对象结构）
+  const entries = Object.entries(projects || {});
+  entries.sort(([, a], [, b]) => compare(a, b));
+  const sortedObj = {};
+  for (const [key, value] of entries) {
+    sortedObj[key] = value;
+  }
+  return sortedObj;
+}
+
+// 讲日期字符串格式化为主页需要的 Oct, 2024 格式
+export function formatDateToMonthYear(dateStr) {
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) {
+    return null; // 无效日期返回null
+  }
+  const options = { year: "numeric", month: "short" };
+  return date.toLocaleDateString("en-US", options);
+}

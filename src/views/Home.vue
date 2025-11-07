@@ -2,6 +2,12 @@
 import { useHead } from "@unhead/vue";
 import router from "../router";
 import { routerConfig } from "../../config/router";
+import {
+  formatDateToMonthYear,
+  sortProjectsByDate,
+} from "../components/utilFuncs.js";
+import canlendarIcon from "../assets/canlendar.svg?component";
+import MarkdownSpan from "../components/markdownSpan.vue";
 useHead({
   title: "CPS Group SJTU",
   meta: [
@@ -13,6 +19,9 @@ useHead({
     { name: "language", content: "English" },
   ],
 });
+
+// 按照时间排序项目
+const routerConfigSorted = sortProjectsByDate(routerConfig);
 </script>
 
 <template>
@@ -22,7 +31,7 @@ useHead({
     <div class="content">
       <div
         class="proj-card"
-        v-for="(config, link) in routerConfig"
+        v-for="(config, link) in routerConfigSorted"
         :key="link"
         @click="router.push(link)"
       >
@@ -49,8 +58,44 @@ useHead({
           </span>
         </div>
         <div class="abstract">
-          <b>Abstract:</b>
-          {{ config.paperInfo.abstract }}
+          <b>Abstract: </b>
+          <MarkdownSpan :content="config.paperInfo.abstract" />
+        </div>
+        <div
+          class="bandages-container"
+          v-if="config.homeConfig.bandages.length !== 0"
+        >
+          <div
+            class="bandage"
+            v-if="formatDateToMonthYear(config.paperInfo.date)"
+            :style="{
+              '--bandage-color': 'var(--primary-color)',
+            }"
+          >
+            <canlendar-icon class="icon" />
+            {{ formatDateToMonthYear(config.paperInfo.date) }}
+          </div>
+          <div
+            class="bandage"
+            v-for="(bandage, index) in config.homeConfig?.bandages"
+            :key="index"
+            :style="{
+              '--bandage-color': bandage.color || 'var(--primary-color)',
+            }"
+          >
+            <component
+              v-if="bandage.icon && bandage.icon_type === 'svg'"
+              :is="'span'"
+              class="icon"
+              v-html="bandage.icon"
+            />
+            <img
+              v-else-if="bandage.icon && bandage.icon_type === 'url'"
+              :src="bandage.icon"
+              class="icon"
+            />
+            {{ bandage.label }}
+          </div>
         </div>
       </div>
     </div>
@@ -83,13 +128,12 @@ useHead({
 
 .proj-card {
   background-color: var(--background-color);
-  padding: 2.5rem;
+  padding: 2rem;
   margin: 1rem 0;
   border-radius: 20px;
   flex: 1;
   border: 1.5px solid var(--border-color);
   text-align: center;
-  font-size: 1.2rem;
   transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
@@ -100,6 +144,7 @@ useHead({
 }
 
 .proj-card > .title {
+  font-size: 1.2rem;
   font-weight: bold;
   line-height: 1.5;
   text-align: start;
@@ -112,6 +157,12 @@ useHead({
   text-align: start;
 }
 
+.proj-card > .authors a {
+  color: var(--font-color-tertiary);
+  font-weight: normal;
+  text-decoration: none;
+}
+
 .proj-card > .authors .underline {
   text-decoration: underline;
 }
@@ -122,15 +173,19 @@ useHead({
 
 .proj-card > .abstract {
   margin-top: 1rem;
-  font-size: 1rem;
   color: var(--font-color-secondary);
-  text-align: start;
-  line-height: 1.6;
+  text-align: justify;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 5; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+.proj-card > .abstract > .innermd {
+  color: var(--font-color-secondary);
+  line-height: 1.6;
+  font-size: inherit;
 }
 
 .content {
@@ -139,5 +194,30 @@ useHead({
   margin: 0 2rem;
   margin-top: 1rem;
   margin-bottom: 3rem;
+}
+
+.bandages-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.8rem;
+  gap: 0.6rem;
+}
+
+.bandage {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  color: var(--bandage-color);
+  border: 1px solid var(--bandage-color);
+  padding: 0.3rem 0.8rem;
+  width: fit-content;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  fill: var(--bandage-color);
 }
 </style>

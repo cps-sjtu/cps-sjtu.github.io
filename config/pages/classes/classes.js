@@ -3,11 +3,11 @@
 // This file defines the block classes used in the project page.
 // ===================================================================
 
-export class AbstractBlock {
-  id = "abstract";
+export class PuretextBlock {
+  id = "puretext";
   constructor(title, content) {
-    this.title = title; // 摘要标题
-    this.content = content; // 摘要内容
+    this.title = title; // 标题
+    this.content = content; // 内容
   }
   getProps() {
     return {
@@ -46,6 +46,8 @@ export class GridviewImageBlock {
     imgFit,
     rows,
     columns,
+    width,
+    height,
     dataList
   ) {
     this.title = title; // 网格视图节标题，可不显示
@@ -54,6 +56,8 @@ export class GridviewImageBlock {
     this.imgFit = imgFit; // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
     this.rows = rows; // 行数
     this.columns = columns; // 列数
+    this.width = width; // 宽度，支持百分比和像素值
+    this.height = height; // 高度，支持百分比和像素值
     this.dataList = dataList; // 图片数据列表
   }
   getProps() {
@@ -64,6 +68,8 @@ export class GridviewImageBlock {
       imgFit: this.imgFit,
       rows: this.rows,
       columns: this.columns,
+      width: this.width,
+      height: this.height,
       dataList: this.dataList,
     };
   }

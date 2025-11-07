@@ -1,5 +1,5 @@
 import {
-  AbstractBlock,
+  PuretextBlock,
   CarouselBlock,
   GridviewImageBlock,
   VideoBlock,
@@ -10,6 +10,20 @@ import {
 const routeConfig = {
   // redirect: "/DAG-STL",
   redirect: null,
+};
+
+// 首页配置
+const homeConfig = {
+  // 要显示的徽章配置，如果配置了 paperInfo.date，则会自动显示发布日期徽章
+  bandages: [
+    // {
+    //   type: "custom", // 徽章标签
+    //   label: "NeurIPS 2025", // 徽章标签
+    //   color: "#ff3c00ff", // 徽章颜色，"" 表示使用默认颜色"
+    //   icon_type: "url", // 徽章图标类型，目前支持 svg 和 url 两种类型
+    //   icon: "https://nips.cc/static/core/img/neurips-navbar-logo.svg", // 徽章图标svg或链接
+    // },
+  ],
 };
 
 // 项目页配置
@@ -29,7 +43,7 @@ const paperInfo = {
   title:
     "DAG-STL: A Hierarchical Framework of Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks",
   shortTitle: "DAG-STL",
-  date: "Oct 2025",
+  date: "",  // YYYY-MM-DD, 可不填
   abstract:
     "Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we investigate the problem of generating executable STL plans for systems whose dynamics are unknown a priori. We propose a new planning framework that uses only task-agnostic data during the offline training stage, enabling zero-shot generalization to new STL tasks. Our framework is hierarchical, including: (i) decomposing the STL task into a set of progress and time constraints, (ii) searching for time-aware way-points guided by task-agnostic data, (iii) generating trajectories using a pre-trained safe diffusion model, and (iv) verifying the STL satisfaction and dynamic feasibility of the trajectory using a robustness-based STL checker and a conformal dynamics verifier. In addition, we incorporate an online replanning strategy during execution to further improve the actuation success rate. Simulation results demonstrate the effectiveness of our method indeed in achieving zero-shot generalization to various STL tasks.",
   bibtex: `@article{YourPaperKey2024,
@@ -129,8 +143,8 @@ const titleBlockInfo = {
 // TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
 // 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
 const blocksInfo = [
-  // 摘要组件信息
-  new AbstractBlock(
+  // 纯文字组件信息
+  new PuretextBlock(
     "Abstract", // 摘要节标题
     paperInfo.abstract // 摘要内容
   ),
@@ -141,6 +155,8 @@ const blocksInfo = [
 // 导出配置
 export const configAll = {
   routeConfig: routeConfig,
+  homeConfig: homeConfig,
+  authorsInfo: authorsInfo,
   pageConfig: pageConfig,
   paperInfo: paperInfo,
   headerInfo: headerInfo,

@@ -1,5 +1,5 @@
 import {
-  AbstractBlock,
+  PuretextBlock,
   CarouselBlock,
   GridviewImageBlock,
   VideoBlock,
@@ -10,6 +10,20 @@ import {
 const routeConfig = {
   // redirect: "/DAG-STL",
   redirect: null,
+};
+
+// 首页配置
+const homeConfig = {
+  // 要显示的徽章配置，如果配置了 paperInfo.date，则会自动显示发布日期徽章
+  bandages: [
+    {
+      type: "custom", // 徽章标签
+      label: "NeurIPS 2025", // 徽章标签
+      color: "#fb7756", // 徽章颜色，"" 表示使用默认颜色"
+      icon_type: "url", // 徽章图标类型，目前支持 svg 和 url 两种类型
+      icon: "https://nips.cc/static/core/img/neurips-navbar-logo.svg", // 徽章图标svg或链接
+    },
+  ],
 };
 
 // 项目页配置
@@ -28,7 +42,7 @@ const pageConfig = {
 const paperInfo = {
   title: "Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks",
   shortTitle: "Zero-Shot STL",
-  date: "Oct 2025",
+  date: "2025-10-05",
   abstract:
     "Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we address the problem of generating executable STL plans for systems with unknown dynamics. We propose a  hierarchical planning framework that enables zero-shot generalization to new STL tasks by leveraging only task-agnostic trajectory data during offline training. The framework consists of three key components: (i) decomposing the STL specification into several progresses and time constraints, (ii) searching for timed waypoints that satisfy all progresses under time constraints, and (iii) generating trajectory segments using a pre-trained diffusion model and stitching them into complete trajectories. We formally prove that our method guarantees STL satisfaction, and simulation results demonstrate its effectiveness in generating dynamically feasible trajectories across diverse long-horizon STL tasks.",
   bibtex: `@article{liu2025zero,
@@ -118,8 +132,8 @@ const titleBlockInfo = {
 // TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
 // 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
 const blocksInfo = [
-  // 摘要组件信息
-  new AbstractBlock(
+  // 纯文字组件信息
+  new PuretextBlock(
     "Abstract", // 摘要节标题
     paperInfo.abstract // 摘要内容
   ),
@@ -130,6 +144,8 @@ const blocksInfo = [
 // 导出配置
 export const configAll = {
   routeConfig: routeConfig,
+  homeConfig: homeConfig,
+  authorsInfo: authorsInfo,
   pageConfig: pageConfig,
   paperInfo: paperInfo,
   headerInfo: headerInfo,

@@ -9,7 +9,7 @@ import HeaderBar from "../../../../src/components/headerBar.vue";
 import ScrollBtn from "../../../../src/components/scrollBtn.vue";
 import TitleBlock from "../../../../src/components/titleBlock.vue";
 import LinkBtn from "../../../../src/components/linkBtn.vue";
-import AbstractBlock from "../../../../src/components/abstractBlock.vue";
+import PuretextBlock from "../../../../src/components/puretextBlock.vue";
 import BibtexBlock from "../../../../src/components/bibtexBlock.vue";
 import CarouselBlock from "../../../../src/components/carouselBlock.vue";
 import GridviewImageBlock from "../../../../src/components/gridviewImageBlock.vue";
@@ -27,7 +27,7 @@ const blocksInfo = configAll.blocksInfo;
 
 // Info id 到 组件映射
 const componentMap = {
-  abstract: AbstractBlock,
+  puretext: PuretextBlock,
   carousel: CarouselBlock,
   gridviewImage: GridviewImageBlock,
   video: VideoBlock,

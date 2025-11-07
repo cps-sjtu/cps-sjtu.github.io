@@ -11,12 +11,12 @@ import HeaderBar from "../components/headerBar.vue";
 import ScrollBtn from "../components/scrollBtn.vue";
 import TitleBlock from "../components/titleBlock.vue";
 import LinkBtn from "../components/linkBtn.vue";
-import AbstractBlock from "../components/abstractBlock.vue";
 import BibtexBlock from "../components/bibtexBlock.vue";
 import CarouselBlock from "../components/carouselBlock.vue";
 import GridviewImageBlock from "../components/gridviewImageBlock.vue";
 import VideoBlock from "../components/videoBlock.vue";
 import FooterBar from "../components/footerBar.vue";
+import PuretextBlock from "../components/puretextBlock.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
@@ -29,7 +29,7 @@ const blocksInfo = props.config.blocksInfo;
 
 // Info id 到 组件映射
 const componentMap = {
-  abstract: AbstractBlock,
+  puretext: PuretextBlock,
   carousel: CarouselBlock,
   gridviewImage: GridviewImageBlock,
   video: VideoBlock,
