@@ -64,7 +64,7 @@ useHead({
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f6f8fa;
+  background-color: var(--background-color-secondary);
   margin: 0;
   font-family: "Arial", sans-serif;
 }
@@ -74,20 +74,20 @@ useHead({
   height: 8rem;
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
-  background-color: white;
+  color: var(--font-color);
+  background-color: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .proj-card {
-  background-color: white;
+  background-color: var(--background-color);
   padding: 2.5rem;
   margin: 1rem 0;
   border-radius: 20px;
   flex: 1;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--border-color);
   text-align: center;
   font-size: 1.2rem;
   transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
@@ -96,7 +96,7 @@ useHead({
 .proj-card:hover {
   cursor: pointer;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .proj-card > .title {
@@ -108,7 +108,7 @@ useHead({
 .proj-card > .authors {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--font-color-tertiary);
   text-align: start;
 }
 
@@ -123,7 +123,7 @@ useHead({
 .proj-card > .abstract {
   margin-top: 1rem;
   font-size: 1rem;
-  color: #666;
+  color: var(--font-color-secondary);
   text-align: start;
   line-height: 1.6;
   overflow: hidden;

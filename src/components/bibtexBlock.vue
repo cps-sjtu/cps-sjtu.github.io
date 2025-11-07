@@ -1,21 +1,3 @@
-<template>
-  <div class="block">
-    <div class="bib-header">
-      <div class="block-title">BibTeX</div>
-      <div class="bib-actions">
-        <button class="btn" @click="copy">复制</button>
-        <button class="btn" @click="download">下载 .bib</button>
-      </div>
-    </div>
-
-    <div class="inner-content">
-      <div class="bib-raw">
-        <pre><code>{{ bibtex }}</code></pre>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 const props = defineProps({
   bibtex: { type: String, default: "" },
@@ -50,6 +32,24 @@ function download() {
 }
 </script>
 
+<template>
+  <div class="block">
+    <div class="bib-header">
+      <div class="block-title">BibTeX</div>
+      <div class="bib-actions">
+        <button class="btn" @click="copy">复制</button>
+        <button class="btn" @click="download">下载 .bib</button>
+      </div>
+    </div>
+
+    <div class="inner-content">
+      <div class="bib-raw">
+        <pre><code>{{ bibtex }}</code></pre>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 .inner-content {
   margin: 0 2rem;
@@ -73,18 +73,9 @@ function download() {
 }
 .btn {
   height: 2.5rem;
-  padding: 0 1.5rem;
   font-weight: 600;
   font-size: 1rem;
-  border-radius: 10px;
-  background-color: #f5f6ff;
-  border: 1px solid #dae2ff;
-  transition: background-color 0.15s;
   white-space: nowrap;
-}
-.btn:hover {
-  cursor: pointer;
-  background-color: #dae2ff;
 }
 .bib-raw pre {
   overflow-x: auto;
@@ -92,9 +83,9 @@ function download() {
   margin: 0;
   word-wrap: normal;
   padding: 1rem 3rem;
-  background: #f3f3f3;
+  background: var(--bibtex-block-bg);
   border-radius: 16px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
   text-align: left;
   font-size: 0.9rem;
 }

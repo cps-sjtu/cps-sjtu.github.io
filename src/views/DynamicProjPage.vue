@@ -16,19 +16,25 @@ import BibtexBlock from "../components/bibtexBlock.vue";
 import CarouselBlock from "../components/carouselBlock.vue";
 import GridviewImageBlock from "../components/gridviewImageBlock.vue";
 import VideoBlock from "../components/videoBlock.vue";
+import FooterBar from "../components/footerBar.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
 // 提取配置信息
+const pageConfig = props.config.pageConfig;
 const paperInfo = props.config.paperInfo;
 const headerInfo = props.config.headerInfo;
-const pageConfig = props.config.pageConfig;
-const authorsInfo = props.config.authorsInfo;
-const affiliationsInfo = props.config.affiliationsInfo;
-const linkbtnsInfo = props.config.linkbtnsInfo;
-const carouselsInfo = props.config.carouselsInfo;
-const gridviewImagesInfo = props.config.gridviewImagesInfo;
-const videosInfo = props.config.videosInfo;
+const titleBlockInfo = props.config.titleBlockInfo;
+const blocksInfo = props.config.blocksInfo;
+
+// Info id 到 组件映射
+const componentMap = {
+  abstract: AbstractBlock,
+  carousel: CarouselBlock,
+  gridviewImage: GridviewImageBlock,
+  video: VideoBlock,
+  bibtex: BibtexBlock,
+};
 
 // 设置页面头信息
 useHead(getHeaderFromInfo(headerInfo));
@@ -49,7 +55,7 @@ onUnmounted(() => {
 <template>
   <div class="proj-page-container">
     <!-- Header -->
-    <HeaderBar :router="router" :paperInfo="paperInfo" />
+    <HeaderBar :router="router" :shortTitle="paperInfo.shortTitle" />
 
     <!-- Scroll to Top Button -->
     <ScrollBtn
@@ -61,18 +67,17 @@ onUnmounted(() => {
     <div class="content">
       <!-- Title Block -->
       <TitleBlock
-        :title="paperInfo.title"
-        :authors="authorsInfo"
-        :affiliations="affiliationsInfo"
+        :title="titleBlockInfo.title"
+        :authors="titleBlockInfo.authors"
+        :affiliations="titleBlockInfo.affiliations"
         :addAndBetweenLastTwoNames="pageConfig.addAndBetweenLastTwoNames"
-        :showAffiliationSup="pageConfig.titleBlock.showAffiliationSup"
-        :showAffiliationInfo="pageConfig.titleBlock.showAffiliationInfo"
-        :showLinkBtns="pageConfig.titleBlock.showLinkBtns"
+        :showAffiliationSup="pageConfig.showAffiliationSup"
+        :showAffiliationInfo="pageConfig.showAffiliationInfo"
       >
         <template #linkbtns>
           <div class="link-btns-container">
             <LinkBtn
-              v-for="linkbtnInfo in linkbtnsInfo"
+              v-for="linkbtnInfo in titleBlockInfo.linkbtns"
               :info="linkbtnInfo"
               :customBtn="false"
             />
@@ -81,59 +86,15 @@ onUnmounted(() => {
         </template>
       </TitleBlock>
 
-      <!-- Paper abstract -->
-      <AbstractBlock
-        v-if="pageConfig.showAbstractBlock"
-        :blockTitle="'Abstract'"
-        :abstract="paperInfo.abstract"
-      />
-
-      <!-- carousel -->
-      <CarouselBlock
-        v-for="info in carouselsInfo"
-        :description="info.description"
-        :imgFit="info.imgFit"
-        :blockTitle="info.title"
-        :dataList="info.dataList"
-        :style="info.style"
-      />
-
-      <!-- gridview images -->
-      <GridviewImageBlock
-        v-for="info in gridviewImagesInfo"
-        :imgFit="info.imgFit"
-        :description="info.description"
-        :blockTitle="info.title"
-        :showImageCaption="info.showImageCaption"
-        :rows="info.rows"
-        :columns="info.columns"
-        :dataList="info.dataList"
-      />
-
-      <!-- video block -->
-      <VideoBlock
-        v-for="info in videosInfo"
-        :blockTitle="info.title"
-        :description="info.description"
-        :data="info.data"
-      />
-
-      <!--BibTex citation -->
-      <BibtexBlock
-        v-if="paperInfo.bibtex && pageConfig.showBibtexBlock"
-        :bibtex="paperInfo.bibtex"
+      <!-- Dynamic Blocks -->
+      <component
+        v-for="info in blocksInfo"
+        :is="componentMap[info.id]"
+        v-bind="info.getProps()"
       />
     </div>
 
-    <div class="footer">
-      <div class="ref">
-        This page's design was inspired in part by
-        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">
-          Eliahu Horwitz's Academic project page template
-        </a>
-        .
-      </div>
-    </div>
+    <FooterBar />
   </div>
 </template>
 
@@ -157,22 +118,6 @@ onUnmounted(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-}
-
-.footer {
-  height: 4rem;
-  padding: 1rem 2rem;
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--primary-light-color);
-  /* background-color: var(--background-color-tertiary); */
-}
-
-.footer .ref a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
+  margin-top: 1.5rem;
 }
 </style>

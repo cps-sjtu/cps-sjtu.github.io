@@ -1,4 +1,12 @@
-// 其他路由配置项 [redirect,]
+import {
+  AbstractBlock,
+  CarouselBlock,
+  GridviewImageBlock,
+  VideoBlock,
+  BibtexBlock,
+} from "../classes/classes.js";
+
+// 路由配置项 [redirect,]
 const routeConfig = {
   // redirect: "/DAG-STL",
   redirect: null,
@@ -10,25 +18,16 @@ const pageConfig = {
   showScrollBtn: true,
   // 是否在最后两个作者姓名之间添加 "and", 否则使用逗号
   addAndBetweenLastTwoNames: true,
-  // TitleBlock 组件配置
-  titleBlock: {
-    // 是否显示作者单位上标
-    showAffiliationSup: true,
-    // 是否显示作者单位信息
-    showAffiliationInfo: true,
-    // 是否显示链接按钮
-    showLinkBtns: true,
-  },
-  // 是否显示摘要块
-  showAbstractBlock: true,
-  // 是否显示BibTeX引用块
-  showBibtexBlock: true,
+  // 是否显示作者单位上标
+  showAffiliationSup: true,
+  // 是否显示作者单位信息
+  showAffiliationInfo: true,
 };
 
 // 文章信息
 const paperInfo = {
   title: "Zero-Shot Trajectory Planning for Signal Temporal Logic Tasks",
-  short_title: "Zero-Shot STL",
+  shortTitle: "Zero-Shot STL",
   date: "Oct 2025",
   abstract:
     "Signal Temporal Logic (STL) is a powerful specification language for describing complex temporal behaviors of continuous signals, making it well-suited for high-level robotic task descriptions. However, generating executable plans for STL tasks is challenging, as it requires consideration of the coupling between the task specification and the system dynamics. Existing approaches either follow a model-based setting that explicitly requires knowledge of the system dynamics or adopt a task-oriented data-driven approach to learn plans for specific tasks. In this work, we address the problem of generating executable STL plans for systems with unknown dynamics. We propose a  hierarchical planning framework that enables zero-shot generalization to new STL tasks by leveraging only task-agnostic trajectory data during offline training. The framework consists of three key components: (i) decomposing the STL specification into several progresses and time constraints, (ii) searching for timed waypoints that satisfy all progresses under time constraints, and (iii) generating trajectory segments using a pre-trained diffusion model and stitching them into complete trajectories. We formally prove that our method guarantees STL satisfaction, and simulation results demonstrate its effectiveness in generating dynamically feasible trajectories across diverse long-horizon STL tasks.",
@@ -107,60 +106,25 @@ const linkbtnsInfo = [
   // },
 ];
 
-// 轮播图组件信息
-const carouselsInfo = [
-  // // 每个字典项代表一个轮播节
-  // // style 可选值有 [image]
-  // {
-  //   // 图片类型轮播
-  //   style: "image",
-  //   title: "Example Image Carousel", // 轮播节标题，可不显示
-  //   description: "This is an example image carousel.", // 轮播节描述，可不显示
-  //   imgFit: "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
-  //   dataList: [
-  //     // 图片地址列表 (相对于 public 文件夹的路径)
-  //     "/example/1.png",
-  //     ...
-  //   ],
-  // },
-  // ...
-];
+// TitleBlock 组件信息, 一般无需修改
+const titleBlockInfo = {
+  title: paperInfo.title,
+  authors: authorsInfo,
+  affiliations: affiliationsInfo,
+  linkbtns: linkbtnsInfo,
+};
 
-// 网格视图图片组件信息
-const gridviewImagesInfo = [
-  // // 每个字典项代表一个网格视图节
-  // {
-  //   title: "Example Gridview Image Block", // 网格视图节标题，可不显示
-  //   description: "This is an example gridview image block.", // 网格视图节描述，可不显示
-  //   showImageCaption: true, // 是否显示图片标题
-  //   imgFit: "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
-  //   rows: 2, // 行数
-  //   columns: 3, // 列数
-  //   dataList: [
-  //     // 图片数据列表
-  //     {
-  //       src: "/example/1.png",
-  //       caption: "Image 1 Caption",
-  //     },
-  //     ...
-  //   ],
-  // },
-  // ...
-];
-
-// 视频组件信息
-const videosInfo = [
-  // 每个字典项代表一个视频节
-  // {
-  //   title: "Example Video Block", // 视频节标题，可不显示
-  //   description: "This is an example video block.", // 视频节描述，可不显示
-  //   data: {
-  //     // video_type: "video", // 视频类型，可选值有 [iframe, video]
-  //     // src: "/example/video.mp4",
-  //     caption: "Example Video 1",
-  //   },
-  // },
-  // ...
+// 自定义其他节组件信息
+// TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
+// 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
+const blocksInfo = [
+  // 摘要组件信息
+  new AbstractBlock(
+    "Abstract", // 摘要节标题
+    paperInfo.abstract // 摘要内容
+  ),
+  // Bibtex引用组件信息
+  new BibtexBlock(paperInfo.bibtex),
 ];
 
 // 导出配置
@@ -169,10 +133,6 @@ export const configAll = {
   pageConfig: pageConfig,
   paperInfo: paperInfo,
   headerInfo: headerInfo,
-  authorsInfo: authorsInfo,
-  affiliationsInfo: affiliationsInfo,
-  linkbtnsInfo: linkbtnsInfo,
-  carouselsInfo: carouselsInfo,
-  gridviewImagesInfo: gridviewImagesInfo,
-  videosInfo: videosInfo,
+  titleBlockInfo: titleBlockInfo,
+  blocksInfo: blocksInfo,
 };

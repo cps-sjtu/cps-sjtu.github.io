@@ -1,18 +1,18 @@
 <script setup>
 import backIcon from "../assets/back.svg?component";
-defineProps({
+const props = defineProps({
   router: Object,
-  paperInfo: Object,
+  shortTitle: String,
 });
 </script>
 
 <template>
   <div class="header">
-    <button class="homepage-btn" @click="router.push('/')">
+    <button class="homepage-btn" @click="props.router.push('/')">
       <backIcon class="icon" />
       <span>View more works</span>
     </button>
-    <div class="header-text">{{ paperInfo.short_title }}</div>
+    <div class="header-text">{{ props.shortTitle }}</div>
   </div>
 </template>
 
@@ -23,8 +23,8 @@ defineProps({
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
-  background-color: #f1f5f9bc;
-  backdrop-filter: blur(5px);
+  background-color: var(--primary-light-50);
+  backdrop-filter: blur(7.5px);
   display: flex;
   flex-direction: row;
   align-items: center;

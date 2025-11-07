@@ -27,7 +27,7 @@ const props = defineProps({
       return [];
     },
   },
-  style: {
+  carouselType: {
     // 轮播图类型，可选值有 [image]
     type: String,
     default: null,
@@ -52,7 +52,7 @@ const carouselConfig = {
           :key="index"
         >
           <img
-            v-if="props.style === 'image'"
+            v-if="props.carouselType === 'image'"
             :src="data"
             :style="{ objectFit: props.imgFit }"
           />

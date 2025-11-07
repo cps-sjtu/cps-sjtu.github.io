@@ -1,4 +1,12 @@
-// 其他路由配置项 [redirect,]
+import {
+  AbstractBlock,
+  CarouselBlock,
+  GridviewImageBlock,
+  VideoBlock,
+  BibtexBlock,
+} from "../classes/classes.js";
+
+// 路由配置项 [redirect,]
 const routeConfig = {
   // redirect: "/DAG-STL",
   redirect: null,
@@ -10,25 +18,16 @@ const pageConfig = {
   showScrollBtn: true,
   // 是否在最后两个作者姓名之间添加 "and", 否则使用逗号
   addAndBetweenLastTwoNames: true,
-  // TitleBlock 组件配置
-  titleBlock: {
-    // 是否显示作者单位上标
-    showAffiliationSup: true,
-    // 是否显示作者单位信息
-    showAffiliationInfo: true,
-    // 是否显示链接按钮
-    showLinkBtns: true,
-  },
-  // 是否显示摘要块
-  showAbstractBlock: true,
-  // 是否显示BibTeX引用块
-  showBibtexBlock: true,
+  // 是否显示作者单位上标
+  showAffiliationSup: true,
+  // 是否显示作者单位信息
+  showAffiliationInfo: true,
 };
 
 // 文章信息
 const paperInfo = {
   title: "EXAMPLE_TITLE_PLACEHOLDER",
-  short_title: "EXAMPLE_SHORT_TITLE_PLACEHOLDER",
+  shortTitle: "EXAMPLE_SHORT_TITLE_PLACEHOLDER",
   date: "EXAMPLE_DATE_PLACEHOLDER",
   abstract: "EXAMPLE_ABSTRACT_PLACEHOLDER",
   bibtex: `@article{YourPaperKey2024,
@@ -102,81 +101,64 @@ const linkbtnsInfo = [
   // },
 ];
 
-// 轮播图组件信息
-const carouselsInfo = [
-  // 每个字典项代表一个轮播节
-  // style 可选值有 [image]
-  {
-    // 图片类型轮播
-    style: "image",
-    title: "Example Image Carousel", // 轮播节标题，可不显示
-    description: "This is an example image carousel.", // 轮播节描述，可不显示
-    imgFit: "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
-    dataList: [
+// TitleBlock 组件信息, 一般无需修改
+const titleBlockInfo = {
+  title: paperInfo.title,
+  authors: authorsInfo,
+  affiliations: affiliationsInfo,
+  linkbtns: linkbtnsInfo,
+};
+
+// 自定义其他节组件信息
+// TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
+// 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
+const blocksInfo = [
+  // 摘要组件信息
+  new AbstractBlock(
+    "Abstract", // 摘要节标题
+    paperInfo.abstract // 摘要内容
+  ),
+  // 轮播图组件信息
+  new CarouselBlock(
+    "image", // 图片类型轮播
+    "Example Image Carousel", // 轮播节标题，可不显示
+    "This is an example image carousel.", // 轮播节描述，可不显示
+    "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
+    [
       // 图片地址列表 (相对于 public 文件夹的路径)
       "/example/1.png",
-      "/example/2.png",
-      "/example/3.png",
-      "/example/4.jpg",
-      "/example/5.jpg",
-    ],
-  },
-];
-
-// 网格视图图片组件信息
-const gridviewImagesInfo = [
-  // 每个字典项代表一个网格视图节
-  {
-    title: "Example Gridview Image Block", // 网格视图节标题，可不显示
-    description: "This is an example gridview image block.", // 网格视图节描述，可不显示
-    showImageCaption: true, // 是否显示图片标题
-    imgFit: "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
-    rows: 2, // 行数
-    columns: 3, // 列数
-    dataList: [
+    ]
+  ),
+  // 网格视图图片组件信息
+  new GridviewImageBlock(
+    "Example Gridview Image Block", // 网格视图节标题，可不显示
+    "This is an example gridview image block.", // 网格视图节描述，可不显示
+    true, // 是否显示图片标题
+    "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
+    1, // 行数
+    2, // 列数
+    [
       // 图片数据列表
       {
         src: "/example/1.png",
         caption: "Image 1 Caption",
       },
-      {
-        src: "/example/2.png",
-        caption: "Image 2 Caption",
-      },
-      {
-        src: "/example/3.png",
-        caption: "Image 3 Caption",
-      },
-      {
-        src: "/example/4.jpg",
-        caption: "Image 4 Caption",
-      },
-      {
-        src: "/example/5.jpg",
-        caption: "Image 5 Caption",
-      },
-      {
-        src: "/example/antmaze.png",
-        caption: "Image 6 Caption",
-      },
-    ],
-  },
-];
-
-// 视频组件信息
-const videosInfo = [
-  // 每个字典项代表一个视频节
-  {
-    title: "Example Video Block", // 视频节标题，可不显示
-    description: "This is an example video block.", // 视频节描述，可不显示
-    data: {
-      // video_type: "video", // 视频类型，可选值有 [iframe, video]
+    ]
+  ),
+  // 视频组件信息
+  new VideoBlock(
+    "Example Video Block", // 视频节标题，可不显示
+    "This is an example video block.", // 视频节描述，可不显示
+    {
+      // videoType: "video", // 视频类型，可选值有 [iframe, video]
       // src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      video_type: "iframe", // 视频类型，可选值有 [iframe, video]
-      src: "//player.bilibili.com/player.html?isOutside=true&aid=584666059&bvid=BV15z4y1Z734&cid=239973476&p=1",
-      caption: "Example Video 1",
-    },
-  },
+      videoType: "iframe", // 视频类型，可选值有 [iframe, video]
+      src: "//player.bilibili.com/player.html?isOutside=true&aid=584666059&bvid=BV15z4y1Z734&cid=239973476&p=1", // 视频地址
+      caption: "Example Video 1", // 视频标题，可不显示
+    }
+  ),
+  // Bibtex引用组件信息
+  new BibtexBlock(paperInfo.bibtex),
 ];
 
 // 导出配置
@@ -185,10 +167,6 @@ export const configAll = {
   pageConfig: pageConfig,
   paperInfo: paperInfo,
   headerInfo: headerInfo,
-  authorsInfo: authorsInfo,
-  affiliationsInfo: affiliationsInfo,
-  linkbtnsInfo: linkbtnsInfo,
-  carouselsInfo: carouselsInfo,
-  gridviewImagesInfo: gridviewImagesInfo,
-  videosInfo: videosInfo,
+  titleBlockInfo: titleBlockInfo,
+  blocksInfo: blocksInfo,
 };

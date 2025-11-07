@@ -14,19 +14,25 @@ import BibtexBlock from "../../../../src/components/bibtexBlock.vue";
 import CarouselBlock from "../../../../src/components/carouselBlock.vue";
 import GridviewImageBlock from "../../../../src/components/gridviewImageBlock.vue";
 import VideoBlock from "../../../../src/components/videoBlock.vue";
+import FooterBar from "../../../../src/components/footerBar.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
 // 提取配置信息
+const pageConfig = configAll.pageConfig;
 const paperInfo = configAll.paperInfo;
 const headerInfo = configAll.headerInfo;
-const pageConfig = configAll.pageConfig;
-const authorsInfo = configAll.authorsInfo;
-const affiliationsInfo = configAll.affiliationsInfo;
-const linkbtnsInfo = configAll.linkbtnsInfo;
-const carouselsInfo = configAll.carouselsInfo;
-const gridviewImagesInfo = configAll.gridviewImagesInfo;
-const videosInfo = configAll.videosInfo;
+const titleBlockInfo = configAll.titleBlockInfo;
+const blocksInfo = configAll.blocksInfo;
+
+// Info id 到 组件映射
+const componentMap = {
+  abstract: AbstractBlock,
+  carousel: CarouselBlock,
+  gridviewImage: GridviewImageBlock,
+  video: VideoBlock,
+  bibtex: BibtexBlock,
+};
 
 // 设置页面头信息
 useHead(getHeaderFromInfo(headerInfo));
@@ -47,7 +53,7 @@ onUnmounted(() => {
 <template>
   <div class="proj-page-container">
     <!-- Header -->
-    <HeaderBar :router="router" :paperInfo="paperInfo" />
+    <HeaderBar :router="router" :shortTitle="paperInfo.shortTitle" />
 
     <!-- Scroll to Top Button -->
     <ScrollBtn
@@ -59,18 +65,17 @@ onUnmounted(() => {
     <div class="content">
       <!-- Title Block -->
       <TitleBlock
-        :title="paperInfo.title"
-        :authors="authorsInfo"
-        :affiliations="affiliationsInfo"
+        :title="titleBlockInfo.title"
+        :authors="titleBlockInfo.authors"
+        :affiliations="titleBlockInfo.affiliations"
         :addAndBetweenLastTwoNames="pageConfig.addAndBetweenLastTwoNames"
-        :showAffiliationSup="pageConfig.titleBlock.showAffiliationSup"
-        :showAffiliationInfo="pageConfig.titleBlock.showAffiliationInfo"
-        :showLinkBtns="pageConfig.titleBlock.showLinkBtns"
+        :showAffiliationSup="pageConfig.showAffiliationSup"
+        :showAffiliationInfo="pageConfig.showAffiliationInfo"
       >
         <template #linkbtns>
           <div class="link-btns-container">
             <LinkBtn
-              v-for="linkbtnInfo in linkbtnsInfo"
+              v-for="linkbtnInfo in titleBlockInfo.linkbtns"
               :info="linkbtnInfo"
               :customBtn="false"
             />
@@ -79,49 +84,15 @@ onUnmounted(() => {
         </template>
       </TitleBlock>
 
-      <!-- Paper abstract -->
-      <AbstractBlock
-        v-if="pageConfig.showAbstractBlock"
-        :blockTitle="'Abstract'"
-        :abstract="paperInfo.abstract"
-      />
-
-      <!-- carousel -->
-      <CarouselBlock
-        v-for="info in carouselsInfo"
-        :description="info.description"
-        :imgFit="info.imgFit"
-        :blockTitle="info.title"
-        :dataList="info.dataList"
-        :style="info.style"
-      />
-
-      <!-- gridview images -->
-      <GridviewImageBlock
-        v-for="info in gridviewImagesInfo"
-        :imgFit="info.imgFit"
-        :description="info.description"
-        :blockTitle="info.title"
-        :showImageCaption="info.showImageCaption"
-        :rows="info.rows"
-        :columns="info.columns"
-        :dataList="info.dataList"
-      />
-
-      <!-- video block -->
-      <VideoBlock
-        v-for="info in videosInfo"
-        :blockTitle="info.title"
-        :description="info.description"
-        :data="info.data"
-      />
-
-      <!--BibTex citation -->
-      <BibtexBlock
-        v-if="paperInfo.bibtex && pageConfig.showBibtexBlock"
-        :bibtex="paperInfo.bibtex"
+      <!-- Dynamic Blocks -->
+      <component
+        v-for="info in blocksInfo"
+        :is="componentMap[info.id]"
+        v-bind="info.getProps()"
       />
     </div>
+
+    <FooterBar />
   </div>
 </template>
 
@@ -131,7 +102,7 @@ onUnmounted(() => {
   width: 80%;
   max-width: 1200px;
   margin: 0 2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
 .proj-page-container {
@@ -145,5 +116,6 @@ onUnmounted(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  margin-top: 1.5rem;
 }
 </style>

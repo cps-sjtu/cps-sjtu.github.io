@@ -3,7 +3,6 @@ defineProps({
   title: String,
   authors: Array,
   affiliations: Array,
-  showLinkBtns: Boolean,
   addAndBetweenLastTwoNames: Boolean,
   showAffiliationSup: Boolean,
   showAffiliationInfo: Boolean,
@@ -40,9 +39,7 @@ defineProps({
         >
           and
         </span>
-        <span
-          v-else-if="index !== authors.length - 1"
-          style="margin-right: 1ch"
+        <span v-else-if="index !== authors.length - 1" style="margin-right: 1ch"
           >,</span
         >
       </span>
@@ -57,9 +54,7 @@ defineProps({
     </div>
 
     <!-- 论文/代码链接 -->
-    <div v-if="showLinkBtns" class="link-block">
-      <slot name="linkbtns" />
-    </div>
+    <slot name="linkbtns" />
   </div>
 </template>
 
@@ -85,7 +80,7 @@ h1 {
 
 .author-name {
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--font-color-primary);
   text-decoration: none;
   transition: color 0.2s;
   white-space: nowrap;
@@ -93,7 +88,7 @@ h1 {
 
 a:hover {
   cursor: pointer;
-  color: var(--primary-hover);
+  color: var(--font-hover-primary);
 }
 
 a.hover-underline {
@@ -108,7 +103,7 @@ a.hover-underline::after {
   bottom: 0;
   width: 0;
   height: 2px;
-  background-color: var(--primary-hover);
+  background-color: var(--font-hover-primary);
   transition: width 0.3s ease;
 }
 
@@ -119,12 +114,5 @@ a.hover-underline:hover::after {
 .affiliation-block {
   margin-top: 1rem;
   font-size: 0.9rem;
-}
-
-.link-block {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
 }
 </style>

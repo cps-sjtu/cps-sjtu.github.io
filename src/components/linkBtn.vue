@@ -14,7 +14,7 @@ const iconTypeMap = {
 </script>
 
 <template setup>
-  <button>
+  <button class="btn">
     <a :href="info.url">
       <div v-if="!customBtn" class="container">
         <component :is="iconTypeMap[info.type]" class="icon" />
@@ -26,19 +26,9 @@ const iconTypeMap = {
 </template>
 
 <style lang="css" scoped>
-button {
+.btn {
   height: 3rem;
   min-width: 7rem;
-  padding: 0 1.5rem;
-  border-radius: 14px;
-  background-color: #f5f6ff;
-  border: 1px solid #dae2ff;
-  transition: background-color 0.15s;
-}
-
-button:hover {
-  cursor: pointer;
-  background-color: #dae2ff;
 }
 
 .icon {

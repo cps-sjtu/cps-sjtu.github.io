@@ -24,8 +24,8 @@ defineProps({
   background: var(--primary-color);
   color: white;
   border: none;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 50%;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
@@ -41,8 +41,8 @@ defineProps({
 }
 
 .scroll-to-top .icon {
-  height: 1rem;
-  width: 1rem;
+  height: 1.2rem;
+  width: 1.2rem;
   fill: white;
 }
 

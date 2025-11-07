@@ -2,7 +2,7 @@
 import BasicBlock from "./basicBlock.vue";
 
 defineProps({
-  abstract: String,
+  content: String,
 });
 </script>
 
@@ -10,7 +10,7 @@ defineProps({
   <BasicBlock v-bind="$attrs">
     <div class="inner-content">
       <p>
-        {{ abstract }}
+        {{ content }}
       </p>
     </div>
   </BasicBlock>

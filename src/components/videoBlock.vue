@@ -14,7 +14,7 @@ const props = defineProps({
       <div class="video-wrapper">
         <video
           class="video"
-          v-if="props.data.video_type === 'video'"
+          v-if="props.data.videoType === 'video'"
           controls
           :src="props.data.src"
         >
@@ -22,7 +22,7 @@ const props = defineProps({
         </video>
         <iframe
           class="video"
-          v-else-if="props.data.video_type === 'iframe'"
+          v-else-if="props.data.videoType === 'iframe'"
           :src="props.data.src"
           frameborder="no"
           allowfullscreen="true"
