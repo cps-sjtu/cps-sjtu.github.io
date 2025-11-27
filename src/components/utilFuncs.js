@@ -80,12 +80,12 @@ export function sortProjectsByDate(projects) {
     const dateA = new Date(a.paperInfo?.date);
     const dateB = new Date(b.paperInfo?.date);
 
-    // 处理无效日期的情况：将无日期的项排到前面
+    // 处理无效日期的情况：将无日期的项排到后面
     const invalidA = Number.isNaN(dateA.getTime());
     const invalidB = Number.isNaN(dateB.getTime());
     if (invalidA && invalidB) return 0;
-    if (invalidA) return -1;
-    if (invalidB) return 1;
+    if (invalidA) return 1;
+    if (invalidB) return -1;
 
     // 降序排列，最新的在前面
     const timeDiff = dateB.getTime() - dateA.getTime();

@@ -103,13 +103,17 @@ onUnmounted(() => {
   justify-self: center;
   width: 80%;
   max-width: 1200px;
-  margin: 0 2rem;
   padding-bottom: 2rem;
+  margin: auto;
 }
 
 .proj-page-container {
   min-height: 100vh;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
 .link-btns-container {

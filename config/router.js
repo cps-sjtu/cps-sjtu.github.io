@@ -1,6 +1,7 @@
 // 导入模板页面配置
 import { configAll as DAG_STLconfig } from "./pages/template/DAG-STL";
 import { configAll as Zero_Shot_STLconfig } from "./pages/template/Zero-Shot STL";
+import { configAll as SAGASconfig } from "./pages/template/SAGAS";
 import { configAll as Example1Config } from "./pages/template/example";
 
 // 导入自定义页面组件和配置
@@ -11,6 +12,7 @@ export const routerConfig = {
   // 主页上的卡片顺序按时间先后顺序排列，最新的在最前面
   "/Zero-Shot-STL": Zero_Shot_STLconfig,
   "/DAG-STL": DAG_STLconfig,
+  "/SAGAS": SAGASconfig,
 
   // ================= 以下为快速配置示例 =================
   // "/example": Example1Config,

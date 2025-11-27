@@ -63,7 +63,10 @@ const routerConfigSorted = sortProjectsByDate(routerConfig);
         </div>
         <div
           class="bandages-container"
-          v-if="config.homeConfig.bandages.length !== 0"
+          v-if="
+            config.homeConfig.bandages.length !== 0 ||
+            formatDateToMonthYear(config.paperInfo.date) !== null
+          "
         >
           <div
             class="bandage"
