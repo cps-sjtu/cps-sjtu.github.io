@@ -1,7 +1,8 @@
 import {
   PuretextBlock,
   CarouselBlock,
-  GridviewImageBlock,
+  GridviewBlock,
+  FlexviewBlock,
   VideoBlock,
   BibtexBlock,
 } from "../../classes/classes.js";
@@ -42,7 +43,7 @@ const pageConfig = {
 const paperInfo = {
   title: "EXAMPLE_TITLE_PLACEHOLDER",
   shortTitle: "EXAMPLE_SHORT_TITLE_PLACEHOLDER",
-  date: "",  // YYYY-MM-DD, 可不填
+  date: "", // YYYY-MM-DD, 可不填
   abstract:
     "EXAMPLE_ABSTRACT_PLACEHOLDER, This block supports **Markdown** syntax.",
   bibtex: `@article{YourPaperKey2024,
@@ -126,7 +127,7 @@ const titleBlockInfo = {
 
 // 自定义其他节组件信息
 // TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
-// 目前支持的组件有：[PuretextBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
+// 目前支持的组件有：[PuretextBlock, CarouselBlock, GridviewBlock, VideoBlock, BibtexBlock]
 const blocksInfo = [
   // 纯文字组件信息
   new PuretextBlock(
@@ -142,10 +143,12 @@ const blocksInfo = [
     [
       // 图片地址列表 (相对于 public 文件夹的路径)
       "/example/1.png",
-    ]
+    ],
+    "More info about this block, shown below the block.", // 更多信息，留空可不显示
+    true // 是否显示块顶部分割线
   ),
-  // 网格视图图片组件信息
-  new GridviewImageBlock(
+  // 网格视图图片/视频组件信息
+  new GridviewBlock(
     "Example Gridview Image Block", // 网格视图节标题，可不显示
     "This is an example gridview image block, this description supports **Markdown** syntax.", // 网格视图节描述，可不显示
     true, // 是否显示图片标题
@@ -155,12 +158,51 @@ const blocksInfo = [
     "100%", // 宽度，支持百分比和像素值
     "auto", // 高度，支持百分比和像素值
     [
+      // 图片/视频数据列表
+      {
+        // 图片
+        src: "/example/1.png",
+        caption: "Image 1 Caption",
+      },
+      {
+        // 视频
+        isVideo: true,
+        videoType: "iframe", // 视频类型，可选值有 [iframe, video]
+        src: "//player.bilibili.com/player.html?isOutside=true&aid=584666059&bvid=BV15z4y1Z734&cid=239973476&p=1", // 视频地址
+        caption: "Example Video 1", // 视频标题，可不显示
+      },
+    ],
+    "More info about this block, shown below the block.", // 更多信息，留空可不显示
+    true // 是否显示块顶部分割线
+  ),
+  // 弹性视图组件信息
+  new FlexviewBlock(
+    "Example Flexview Block", // 弹性视图节标题，留空可不显示
+    "This is an example flexview block, this description supports **Markdown** syntax.", // 弹性视图节描述，留空可不显示
+    true, // 是否显示标题
+    "cover", // 图片适应方式， 可选值有 [cover, contain, fill, scale-down]
+    "49%", // 宽度，支持百分比和像素值
+    "auto", // 高度，支持百分比和像素值
+    [
       // 图片数据列表
       {
         src: "/example/1.png",
         caption: "Image 1 Caption",
       },
-    ]
+      // 视频数据列表
+      {
+        isVideo: true,
+        videoType: "video", // 视频类型，可选值有 [iframe, video]
+        src: "/SAGAS/videos/easy_circ_giant.mp4",
+        caption: "Example Video 1",
+        controls: true, // 是否显示视频控制栏
+        loop: false, // 是否循环播放
+        autoplay: false, // 是否自动播放
+        muted: false, // 是否静音
+      },
+    ],
+    "More info about this block, shown below the block.", // 更多信息，留空可不显示
+    true // 是否显示块顶部分割线
   ),
   // 视频组件信息
   new VideoBlock(
@@ -172,7 +214,9 @@ const blocksInfo = [
       videoType: "iframe", // 视频类型，可选值有 [iframe, video]
       src: "//player.bilibili.com/player.html?isOutside=true&aid=584666059&bvid=BV15z4y1Z734&cid=239973476&p=1", // 视频地址
       caption: "Example Video 1", // 视频标题，可不显示
-    }
+    },
+    "More info about this block, shown below the block.", // 更多信息，留空可不显示
+    true // 是否显示块顶部分割线
   ),
   // Bibtex引用组件信息
   new BibtexBlock(paperInfo.bibtex),

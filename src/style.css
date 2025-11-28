@@ -101,9 +101,14 @@ body {
 }
 
 .block {
-  margin-top: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
+}
+
+.block.no-divider {
+  border-top: none;
 }
 
 .btn {

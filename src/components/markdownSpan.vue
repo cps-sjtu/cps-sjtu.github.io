@@ -19,11 +19,11 @@ const props = defineProps({
 });
 
 const md = new MarkdownIt().use(markdownItKatex);
-const renderedContent = computed(() => md.renderInline(props.content));
+const renderedContent = computed(() => md.render(props.content));
 </script>
 
 <template>
-  <span class="markdown-body innermd" v-html="renderedContent" />
+  <div class="markdown-body innermd" v-html="renderedContent" />
 </template>
 
 <style scoped>

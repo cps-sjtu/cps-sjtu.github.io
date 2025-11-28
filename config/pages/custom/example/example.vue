@@ -12,9 +12,10 @@ import LinkBtn from "../../../../src/components/linkBtn.vue";
 import PuretextBlock from "../../../../src/components/puretextBlock.vue";
 import BibtexBlock from "../../../../src/components/bibtexBlock.vue";
 import CarouselBlock from "../../../../src/components/carouselBlock.vue";
-import GridviewImageBlock from "../../../../src/components/gridviewImageBlock.vue";
+import GridviewBlock from "../../../../src/components/gridviewBlock.vue";
 import VideoBlock from "../../../../src/components/videoBlock.vue";
 import FooterBar from "../../../../src/components/footerBar.vue";
+import FlexviewBlock from "../../../../src/components/flexviewBlock.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
@@ -29,7 +30,8 @@ const blocksInfo = configAll.blocksInfo;
 const componentMap = {
   puretext: PuretextBlock,
   carousel: CarouselBlock,
-  gridviewImage: GridviewImageBlock,
+  gridview: GridviewBlock,
+  flexview: FlexviewBlock,
   video: VideoBlock,
   bibtex: BibtexBlock,
 };

@@ -23,8 +23,8 @@ const props = defineProps({
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--primary-light-50);
-  backdrop-filter: blur(7.5px);
+  background-color: var(--background-color-75);
+  backdrop-filter: blur(15px);
   display: flex;
   flex-direction: row;
   align-items: center;

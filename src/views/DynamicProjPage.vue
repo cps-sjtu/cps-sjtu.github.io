@@ -13,10 +13,11 @@ import TitleBlock from "../components/titleBlock.vue";
 import LinkBtn from "../components/linkBtn.vue";
 import BibtexBlock from "../components/bibtexBlock.vue";
 import CarouselBlock from "../components/carouselBlock.vue";
-import GridviewImageBlock from "../components/gridviewImageBlock.vue";
+import GridviewBlock from "../components/gridviewBlock.vue";
 import VideoBlock from "../components/videoBlock.vue";
 import FooterBar from "../components/footerBar.vue";
 import PuretextBlock from "../components/puretextBlock.vue";
+import FlexviewBlock from "../components/flexviewBlock.vue";
 
 // DONOT CHANGE FOLLOWING FUNCTIONS
 // =================================================
@@ -31,7 +32,8 @@ const blocksInfo = props.config.blocksInfo;
 const componentMap = {
   puretext: PuretextBlock,
   carousel: CarouselBlock,
-  gridviewImage: GridviewImageBlock,
+  gridview: GridviewBlock,
+  flexview: FlexviewBlock,
   video: VideoBlock,
   bibtex: BibtexBlock,
 };

@@ -1,5 +1,7 @@
 <script setup>
 import BasicBlock from "./basicBlock.vue";
+import MarkdownSpan from "./markdownSpan.vue";
+import VideoWrapper from "./videoWrapper.vue";
 const props = defineProps({
   // 视频信息
   data: {
@@ -11,29 +13,12 @@ const props = defineProps({
 <template>
   <BasicBlock v-bind="$attrs">
     <div class="inner-content">
-      <div class="video-wrapper">
-        <video
-          class="video"
-          v-if="props.data.videoType === 'video'"
-          controls
-          :src="props.data.src"
-        >
-          Your browser does not support the video tag.
-        </video>
-        <iframe
-          class="video"
-          v-else-if="props.data.videoType === 'iframe'"
-          :src="props.data.src"
-          frameborder="no"
-          allowfullscreen="true"
-        ></iframe>
-      </div>
-      <div
-        v-if="props.data.caption"
-        style="text-align: center; margin-top: 0.5rem"
-      >
-        {{ props.data.caption }}
-      </div>
+      <VideoWrapper :data="props.data" />
+      <MarkdownSpan
+        v-if="props.data.description"
+        :content="props.data.description"
+        style="margin-top: 0.5rem"
+      />
     </div>
   </BasicBlock>
 </template>
@@ -47,13 +32,5 @@ const props = defineProps({
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%;
-}
-.video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 </style>

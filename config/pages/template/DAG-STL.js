@@ -1,7 +1,7 @@
 import {
   PuretextBlock,
   CarouselBlock,
-  GridviewImageBlock,
+  GridviewBlock,
   VideoBlock,
   BibtexBlock,
 } from "../classes/classes.js";
@@ -141,7 +141,7 @@ const titleBlockInfo = {
 
 // 自定义其他节组件信息
 // TitleBlock 组件只能有一个、且位于最前面，其他组件可按需添加多个，顺序按 blocksInfo 数组顺序排列
-// 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewImageBlock, VideoBlock, BibtexBlock]
+// 目前支持的组件有：[AbstractBlock, CarouselBlock, GridviewBlock, VideoBlock, BibtexBlock]
 const blocksInfo = [
   // 纯文字组件信息
   new PuretextBlock(
