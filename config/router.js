@@ -12,7 +12,7 @@ export const routerConfig = {
   // 主页上的卡片顺序按时间先后顺序排列，最新的在最前面
   "/Zero-Shot-STL": Zero_Shot_STLconfig,
   // "/DAG-STL": DAG_STLconfig,
-  // "/SAGAS": SAGASconfig,
+  "/SAGAS": SAGASconfig,
 
   // ================= 以下为快速配置示例 =================
   // "/example": Example1Config,
