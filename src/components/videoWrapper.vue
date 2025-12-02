@@ -17,7 +17,8 @@ const props = defineProps({
       :controls="props.data.controls"
       :autoplay="props.data.autoplay"
       :loop="props.data.loop"
-      :muted="props.data.muted"
+      :muted="props.data.muted !== undefined ? props.data.muted : props.data.autoplay"
+      playsinline
       style="width: 100%"
       :src="props.data.src"
     >
