@@ -62,42 +62,42 @@ const routerConfigSorted = sortProjectsByDate(routerConfig);
           <MarkdownSpan :content="config.paperInfo.abstract" />
         </div>
         <div
-          class="bandages-container"
+          class="badges-container"
           v-if="
-            config.homeConfig.bandages.length !== 0 ||
+            config.homeConfig.badges.length !== 0 ||
             formatDateToMonthYear(config.paperInfo.date) !== null
           "
         >
           <div
-            class="bandage"
+            class="badge"
             v-if="formatDateToMonthYear(config.paperInfo.date)"
             :style="{
-              '--bandage-color': 'var(--primary-color)',
+              '--badge-color': 'var(--primary-color)',
             }"
           >
             <canlendar-icon class="icon" />
             {{ formatDateToMonthYear(config.paperInfo.date) }}
           </div>
           <div
-            class="bandage"
-            v-for="(bandage, index) in config.homeConfig?.bandages"
+            class="badge"
+            v-for="(badge, index) in config.homeConfig?.badges"
             :key="index"
             :style="{
-              '--bandage-color': bandage.color || 'var(--primary-color)',
+              '--badge-color': badge.color || 'var(--primary-color)',
             }"
           >
             <component
-              v-if="bandage.icon && bandage.icon_type === 'svg'"
+              v-if="badge.icon && badge.icon_type === 'svg'"
               :is="'span'"
               class="icon"
-              v-html="bandage.icon"
+              v-html="badge.icon"
             />
             <img
-              v-else-if="bandage.icon && bandage.icon_type === 'url'"
-              :src="bandage.icon"
+              v-else-if="badge.icon && badge.icon_type === 'url'"
+              :src="badge.icon"
               class="icon"
             />
-            {{ bandage.label }}
+            {{ badge.label }}
           </div>
         </div>
       </div>
@@ -199,20 +199,20 @@ const routerConfigSorted = sortProjectsByDate(routerConfig);
   margin-bottom: 3rem;
 }
 
-.bandages-container {
+.badges-container {
   display: flex;
   justify-content: flex-start;
   margin-top: 0.8rem;
   gap: 0.6rem;
 }
 
-.bandage {
+.badge {
   display: flex;
   align-items: center;
   font-size: 0.85rem;
   border-radius: 10px;
-  color: var(--bandage-color);
-  border: 1px solid var(--bandage-color);
+  color: var(--badge-color);
+  border: 1px solid var(--badge-color);
   padding: 0.3rem 0.8rem;
   width: fit-content;
 }
@@ -221,6 +221,6 @@ const routerConfigSorted = sortProjectsByDate(routerConfig);
   width: 1rem;
   height: 1rem;
   margin-right: 0.5rem;
-  fill: var(--bandage-color);
+  fill: var(--badge-color);
 }
 </style>

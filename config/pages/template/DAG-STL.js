@@ -15,7 +15,7 @@ const routeConfig = {
 // 首页配置
 const homeConfig = {
   // 要显示的徽章配置，如果配置了 paperInfo.date，则会自动显示发布日期徽章
-  bandages: [
+  badges: [
     // {
     //   type: "custom", // 徽章标签
     //   label: "NeurIPS 2025", // 徽章标签
