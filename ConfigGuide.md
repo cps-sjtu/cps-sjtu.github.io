@@ -1,6 +1,6 @@
-# 项目页配置说明
+# CPS项目主页配置说明
 
-页面基于 Vue 构建，使用 Vue Router 进行路由管理，使用 Github Workflow 完成自动化部署。为了方便使用，我们提供了两种配置方式：
+页面基于 `Vue` 构建，使用 `Vue Router` 进行路由管理，使用 `Github Workflow` 完成自动化部署。为了方便使用，我们提供了两种配置方式：
 
 1. **快速配置：** 使用预制模板，只需修改`js`配置文件，可以快速生成页面。
 2. **自定义配置：** 基于模板，可以根据需求自定义页面结构和样式。
@@ -84,9 +84,14 @@
 6. **部署预览：** 提交代码后，Github Workflow 会自动构建并部署页面，稍等片刻后即可通过配置的路由访问新页面。新页面也会被自动加入到主页的项目列表中。
 7. **注意事项：** 自定义页面需要确保组件和样式文件的正确性，避免因代码错误导致页面无法正常显示。建议在本地进行充分测试后再提交代码。
 
-## 本地预览
+## 本地预览配置
 
-如果需要在本地预览修改效果，可以按照以下步骤操作：
+如果希望在本地预览修改效果，我们提供了两种方案：
+
+### 使用本机环境
+
+需要安装 `Node.js` 和相关依赖，运行本地开发服务器进行预览。
+
 1. **安装依赖：** 确保已经安装了 [Node.js](https://nodejs.org/)，然后在项目根目录下运行以下命令安装依赖：
    ```bash
    npm install
@@ -96,3 +101,16 @@
    npm run dev
    ```
 3. **访问本地页面：** 打开浏览器，访问`http://localhost:5173/<ProjPath>`，即可预览新添加或修改的页面。
+
+### 使用 VSCode DevContainers
+
+如果使用 VSCode，可以利用 Dev Containers 功能快速搭建开发环境。**(本机需要有Docker环境，推荐使用)**
+
+1. **安装 Dev Containers 插件：** 确保已经安装了 [Dev Containers](vscode:extension/ms-vscode-remote.remote-containers) 插件。
+2. **打开项目：** 在 VSCode 中打开项目根目录。
+3. **重载窗口：** 按下 `F1`，输入并选择 `Dev Containers: Reopen in Container`，VSCode 会自动构建并打开 DevContainer。**（第一次构建可能需要一些时间，请耐心等待）**
+4. **启动开发服务器：** 进入 DevContainer 后，VSCode 会自动在终端中运行 `npm install` 和 `npm run dev` 命令安装依赖和启动服务器。如果没有自动运行，可以手动在终端中执行：
+   ```bash
+   npm run dev
+   ```
+5. **访问本地页面：** 打开浏览器，访问`http://localhost:5173/<ProjPath>`，即可预览新添加或修改的页面。

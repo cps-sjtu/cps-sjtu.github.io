@@ -1,0 +1,17 @@
+{
+  "name": "cps-group-pages-dev",
+  "build": {
+    "dockerfile": "Dockerfile.dev",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "postCreateCommand": "npm install",
+  "postAttachCommand": "npm run dev",
+  "forwardPorts": [5173],
+  "customizations": {
+    "vscode": {
+      "extensions": ["Vue.volar", "esbenp.prettier-vscode"]
+    }
+  }
+}
