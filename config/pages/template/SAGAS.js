@@ -221,9 +221,9 @@ As illustrated above, the proposed pipeline is structured into four distinct sta
       {
         isVideo: true,
         videoType: "video", // 视频类型，可选值有 [iframe, video]
-        src: "/SAGAS/videos/easy_circ_large.mp4", // 视频地址
-        caption: `Easy task on antmaze-large-navigate  
-        $\\mathrm{F}(e1 \\vee e2 \\vee e7 \\vee e4)$
+        src: "/SAGAS/videos/medium_circ_large.mp4", // 视频地址
+        caption: `Medium task on antmaze-large-navigate  
+        $\\mathrm{GF}(e0 \\wedge \\mathrm{F}(e4) \\wedge \\mathrm{F}(e5) \\wedge \\mathrm{F}(e3))$
         `, // 视频标题，可不显示
         autoplay: true, // 自动播放
         loop: true, // 循环播放
@@ -233,7 +233,7 @@ As illustrated above, the proposed pipeline is structured into four distinct sta
         videoType: "video", // 视频类型，可选值有 [iframe, video]
         src: "/SAGAS/videos/hard_circ_large.mp4", // 视频地址
         caption: `Hard task on antmaze-large-navigate  
-        $\\mathrm{F}(e0) \\wedge (\\neg e0 \\mathrm{U} e1) \\wedge \\mathrm{F}(e2) \\wedge \\mathrm{F}(e0) \\wedge \\mathrm{F}(e7) \\wedge \\mathrm{F}(e4) \\wedge \\mathrm{F}(e1) \\wedge \\mathrm{G}(\\mathrm{F}(e5) \\wedge \\mathrm{F}(e1) \\wedge \\mathrm{F}(e7) \\wedge \\mathrm{F}(e4)) \\wedge \\mathrm{F}(e2) \\wedge \\mathrm{F}(e3) \\wedge \\mathrm{F}(e4) \\wedge \\mathrm{F}(e0) \\wedge (\\neg e3 \\mathrm{U} e2) \\wedge (\\neg e4 \\mathrm{U} e3) \\wedge (\\neg e0 \\mathrm{U} e4)$
+        $\\mathrm{F}(e0) \\wedge \\mathrm{F}(e5) \\wedge \\mathrm{F}(e7) \\wedge \\mathrm{F}(e6) \\wedge \\mathrm{F}(e3) \\wedge \\mathrm{F}(e7) \\wedge \\mathrm{F}(e0) \\wedge \\mathrm{F}(e3) \\wedge \\mathrm{F}(e2) \\wedge (\\lnot e7 \\mathrm{U} e0) \\wedge (\\lnot e7 \\mathrm{U} e3) \\wedge (\\lnot e7 \\mathrm{U} e2) \\wedge \\mathrm{G}(\\mathrm{F}(e7)) \\wedge \\mathrm{G}(\\mathrm{F}(e1) \\wedge \\mathrm{F}(e0) \\wedge \\mathrm{F}(e3))$
         `, // 视频标题，可不显示
         autoplay: true, // 自动播放
         loop: true, // 循环播放
